@@ -1,7 +1,13 @@
 #include<stdio.h>
 int main(){
-	int i,j,k,n,head,hloc,phloc,a[20],temp,max,sum=0;
-	printf("Enter no. of locations:");
+	int i,j,k,n,head,hloc,phloc,a[20],disk[5000],temp,max,min,l,d=0;
+	for(i=0;i<5000;i++){
+		disk[i]=i;
+	}
+	max=disk[4999];
+	min=disk[0];
+	printf("Disk Drive having 5000 Cylinders numberd 0 to 4999");
+	printf("\nEnter no. of locations:");
 	scanf("%d",&n);
 	printf("Enter position of head:");
 	scanf("%d",&head);
@@ -22,37 +28,51 @@ int main(){
 			}
 		}
 	}
-	max=a[n];
 	for(i=0;i<n;i++){
 		if(head==a[i]){
 			hloc=i;
 			break;
 		}
 	}
-	if(phloc<hloc){
-		k=0;
+	if(phloc<a[hloc]){
 		for(i=hloc;i<n;i++){
+			j = 0;
 			printf("%d ---> ",a[i]);
-			sum=sum+(a[i]-a[i-1]);
+			j = (a[i]-head);
+			d += j;
+			head = a[i];
 		}
-		//sum=sum+(a[i]-a[hloc]);
+		printf("4999 ---> ");
+		l=max-head;
+		k=max-a[hloc-1];
+		head=a[hloc-1];
 		for(i=hloc-1;i>=0;i--){
+			j = 0;
 			printf("%d ---> ",a[i]);
+			j = (head-a[i]);
+			d += j;
+			head = a[i];
 		}
-		k=a[i]-a[hloc-1];
-		sum=sum+(a[hloc-1]-a[0]);
 	}
 	else{
-		k=0;
 		for(i=hloc;i>=0;i--){
+			j = 0;
 			printf("%d ---> ",a[i]);
+			j = (head-a[i]);
+			d += j;
+			head = a[i];
 		}
-		sum=sum+(a[hloc-1]-a[0]);
+		printf("0 ---> ");
+		l=head-min;
+		k=a[hloc+1]-min;
+		head=a[hloc+1];
 		for(i=hloc+1;i<n;i++){
+			j = 0;
 			printf("%d ---> ",a[i]);
+			j = (a[i]-head);
+			d += j;
+			head = a[i];
 		}
-		k=a[hloc+1]-a[0];
-		sum=sum+(a[i]-a[hloc+1])+k;
 	}
-	printf("The Total Distance travelled by Head:%d",sum);
+	printf("\nThe Total Distance travelled by Head:%d",d+k+l);
 }
