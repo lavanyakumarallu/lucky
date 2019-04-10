@@ -1,3 +1,4 @@
+// Multilevel Queue Scheduling
 #include<stdio.h>
 int p[20],a[20],a1[20],q1[20],q2[20],bt[20],at[20],pri[20],b[20],b1[20],i,j,n,c1=0,c2=0;
 int atwt,attat,aswt,astat;
@@ -111,12 +112,6 @@ void sjf(){
 		tat[i]=(wt[i]+b1[i]);
 		swt=swt+wt[i];
 		stat=stat+tat[i];
-		/*w=w+b1[i-1];
-		wt[i]=w-a1[i];
-		ta=ta+wt[i];
-		tat[i]=ta+b1[i];
-		swt=swt+wt[i];
-		stat=stat+tat[i];*/
 	}
 	printf("\n\nFood Serveing to Student : ");
 	printf("\nProcess\t\tArrival Time\tBurst Time\tWaiting Time\tTurn Around Time");
